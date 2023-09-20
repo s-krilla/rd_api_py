@@ -3,17 +3,16 @@
 import os
 import json
 import requests
-
 from pathlib import Path
-
 from dotenv import load_dotenv
+
 load_dotenv()
 
 class RD:
     rd_apitoken = os.getenv('RD_APITOKEN')
     base_url = 'https://api.real-debrid.com/rest/1.0'
     header = {'Authorization': "Bearer " + str(rd_apitoken)}   
-    error_codes = json.load(open(Path(__file__).with_name('error_codes.json')))
+    error_codes = json.load(open(os.path.join(Path(__file__).parent.absolute(), 'error_codes.json')))
 
     def __init__(self):
         self.system = self.System()

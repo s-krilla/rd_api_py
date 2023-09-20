@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
-import sys
-sys.path.append('../')
-
-from rdapi import *
+from rdapi import RD
 
 '''
 System
@@ -12,7 +9,7 @@ System
 
 # print(RD().system.disable_token())
 
-print(RD().system.time().content)
+# print(RD().system.time().content)
 
 # print(RD().system.iso_time().content)
 
