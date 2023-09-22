@@ -15,6 +15,7 @@ class RD:
     error_codes = json.load(open(os.path.join(Path(__file__).parent.absolute(), 'error_codes.json')))
 
     def __init__(self):
+        self.check_token(self.rd_apitoken)
         self.system = self.System()
         self.user = self.User()
         self.unrestrict = self.Unrestrict()
@@ -47,13 +48,13 @@ class RD:
         try:
             request.raise_for_status()
         except requests.exceptions.HTTPError as errh:
-            print ("Http Error:", errh)
+            print (errh)
         except requests.exceptions.ConnectionError as errc:
-            print ("Error Connecting:", errc)
+            print (errc)
         except requests.exceptions.Timeout as errt:
-            print ("Timeout Error:", errt)
+            print (errt)
         except requests.exceptions.RequestException as err:
-            print ("Oops: Something Else", err)
+            print (err)
         try:
             if 'error_code' in request.json():
                 code = request.json()['error_code']
@@ -62,6 +63,10 @@ class RD:
             pass
         return request
     
+    def check_token(self, token):
+        if token is None or token == 'your_token_here':
+            print('Add token to .env')
+
     class System:
         def __init__(self):
             pass
