@@ -2,6 +2,7 @@
 
 import os
 import json
+import logging
 import requests
 from pathlib import Path
 from dotenv import load_dotenv
@@ -48,24 +49,24 @@ class RD:
         try:
             request.raise_for_status()
         except requests.exceptions.HTTPError as errh:
-            print (errh)
+            logging.error(errh)
         except requests.exceptions.ConnectionError as errc:
-            print (errc)
+            logging.error(errc)
         except requests.exceptions.Timeout as errt:
-            print (errt)
+            logging.error(errt)
         except requests.exceptions.RequestException as err:
-            print (err)
+            logging.error(err)
         try:
             if 'error_code' in request.json():
                 code = request.json()['error_code']
-                print(code + ': ' + error_codes[code])
+                logging.warning(code + ': ' + error_codes[code])
         except:
             pass
         return request
     
     def check_token(self, token):
         if token is None or token == 'your_token_here':
-            print('Add token to .env')
+            logging.warning('Add token to .env')
 
     class System:
         def __init__(self):
