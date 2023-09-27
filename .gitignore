@@ -1,3 +1,5 @@
 __pycache__
+.pypirc
 .env
 *.egg-info
+dist
