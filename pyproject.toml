@@ -1,0 +1,28 @@
+[project]
+name = "rd_api_py"
+version = "0.2.0"
+authors = [
+  { name="$krilla" },
+]
+description = "Real Debrid API Library for Python"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests ~=2.31.0",
+    "python-dotenv ~=1.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rdapi = ["*.json"]
+
+[project.urls]
+"Homepage" = "https://github.com/s-krilla/rd_api_py"
+"Bug Tracker" = "https://github.com/s-krilla/rd_api_py/issues"
