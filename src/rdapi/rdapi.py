@@ -5,9 +5,6 @@ import json
 import logging
 import requests
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
 
 class RD:
     rd_apitoken = os.getenv('RD_APITOKEN')
