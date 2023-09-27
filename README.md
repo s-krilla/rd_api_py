@@ -1,15 +1,14 @@
 # rd_api_py
 
-Python library for Real Debrid API
+Real Debrid API Library for Python
 
 ## Installation
 
-Set `RD_APITOKEN` in `.env`. 
+Set `RD_APITOKEN` in `.env`
 
 Install the package.
 ```bash
-cd rd_api_py
-pip install -e .
+python -m pip install rd_api_py
 ```
 
 ## Usage
