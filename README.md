@@ -4,12 +4,19 @@ Real Debrid API Library for Python
 
 ## Installation
 
-Install the package.
+Install the package
+
 ```bash
 python -m pip install rd_api_py
 ```
 
-Set `RD_APITOKEN` `.env` in `rd_refresh` or your script
+Set environment variables in `.env` in `rd_refresh` or your script
+
+```bash
+RD_APITOKEN="your_token_here"
+SLEEP=100 # Delay (ms) between requests - optional, default recommended
+LONG_SLEEP=5000 # Long delay (ms) every 500 requests - optional, default recommended
+```
 
 ## Usage
 
