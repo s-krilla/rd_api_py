@@ -53,17 +53,18 @@ class RD:
         try:
             request.raise_for_status()
         except requests.exceptions.HTTPError as errh:
-            logging.error(f"{errh} at {path}")
+            logging.error('%s at %s', errh, path)
         except requests.exceptions.ConnectionError as errc:
-            logging.error(f"{errc} at {path}")
+            logging.error('%s at %s', errc, path)
         except requests.exceptions.Timeout as errt:
-            logging.error(f"{errt} at {path}")
+            logging.error('%s at %s', errt, path)
         except requests.exceptions.RequestException as err:
-            logging.error(f"{err} at {path}")
+            logging.error('%s at %s', err, path)
         try:
             if 'error_code' in request.json():
                 code = request.json()['error_code']
-                logging.warning(f"{code}: {error_codes.get(code, 'Unknown error')} at {path}")
+                message = error_codes.get(str(code), 'Unknown error')
+                logging.warning('%s: %s at %s', code, message, path)
         except:
             pass
         self.handle_sleep()
@@ -75,10 +76,10 @@ class RD:
 
     def handle_sleep(self):
         if self.count < 500:
-            logging.debug(f'Sleeping: {self.sleep} ms')
+            logging.debug('Sleeping %sms', self.sleep)
             time.sleep(self.sleep / 1000)
         elif self.count == 500:
-            logging.debug(f'Sleeping: {self.long_sleep} ms')
+            logging.debug('Sleeping %sms', self.long_sleep)
             time.sleep(self.long_sleep / 1000)
             self.count = 0      
 
