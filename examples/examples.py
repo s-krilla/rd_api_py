@@ -121,7 +121,7 @@ RD.settings.update('streaming_language_preference', 'eng')
 
 RD.settings.convert_points()
 
-RD.settings.change_passwoRD
+RD.settings.change_password()
 
 import os
 filepath = os.getcwd() + '/avatar.png'
