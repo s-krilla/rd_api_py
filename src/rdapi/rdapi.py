@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 import os
+import time
 import json
 import logging
 import requests
+import itertools
 from pathlib import Path
 
 class RD:
@@ -11,6 +13,9 @@ class RD:
     base_url = 'https://api.real-debrid.com/rest/1.0'
     header = {'Authorization': "Bearer " + str(rd_apitoken)}   
     error_codes = json.load(open(os.path.join(Path(__file__).parent.absolute(), 'error_codes.json')))
+    sleep = os.getenv('SLEEP', 100)
+    long_sleep = os.getenv('LONG_SLEEP', 5000)
+    count_obj = itertools.cycle(range(0,501))
 
     def __init__(self):
         self.check_token(self.rd_apitoken)
@@ -23,6 +28,7 @@ class RD:
         self.torrents = self.Torrents()
         self.hosts = self.Hosts()
         self.settings = self.Settings()
+        self.count = next(RD.count_obj)
 
     def get(self, path, **options):
         request = requests.get(self.base_url + path, headers=self.header, params=options)
@@ -59,11 +65,21 @@ class RD:
                 logging.warning(code + ': ' + error_codes[code])
         except:
             pass
-        return request
+        self.handle_sleep()
+        return request  
     
     def check_token(self, token):
         if token is None or token == 'your_token_here':
             logging.warning('Add token to .env')
+
+    def handle_sleep(self):
+        if self.count < 500:
+            logging.debug('Sleeping: ' + str(self.sleep) + 'ms')
+            time.sleep(int(self.sleep) / 1000)
+        elif self.count == 500:
+            logging.debug('Sleeping: ' + str(self.long_sleep) + 'ms')
+            time.sleep(int(self.long_sleep) / 1000)
+            self.count = 0      
 
     class System:
         def __init__(self):
