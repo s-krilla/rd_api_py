@@ -10,12 +10,14 @@ Install the package
 python -m pip install rd_api_py
 ```
 
-Set environment variables in `.env` in `rd_refresh` or your script
+Set `.env` environment variables in `rd_refresh` or your script
 
 ```bash
 RD_APITOKEN="your_token_here"
-SLEEP=100 # Delay (ms) between requests - optional, default recommended
-LONG_SLEEP=5000 # Long delay (ms) every 500 requests - optional, default recommended
+
+# Optional, defaults recommended
+SLEEP=2000 # Delay (ms) between requests 
+LONG_SLEEP=30000 # Long delay (ms) every 500 requests
 ```
 
 ## Usage

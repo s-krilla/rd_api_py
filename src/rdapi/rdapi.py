@@ -14,8 +14,8 @@ class RD:
         self.base_url = 'https://api.real-debrid.com/rest/1.0'
         self.header = {'Authorization': "Bearer " + str(self.rd_apitoken)}   
         self.error_codes = json.load(open(os.path.join(Path(__file__).parent.absolute(), 'error_codes.json')))
-        self.sleep = int(os.getenv('SLEEP', 100))
-        self.long_sleep = int(os.getenv('LONG_SLEEP', 5000))
+        self.sleep = int(os.getenv('SLEEP', 2000)) / 1000
+        self.long_sleep = int(os.getenv('LONG_SLEEP', 30000)) / 1000
         self.count_obj = itertools.cycle(range(0, 501))
         self.count = next(self.count_obj)
 
@@ -76,12 +76,12 @@ class RD:
 
     def handle_sleep(self):
         if self.count < 500:
-            logging.debug('Sleeping %sms', self.sleep)
-            time.sleep(self.sleep / 1000)
+            logging.debug('Sleeping %ss', self.sleep)
+            time.sleep(self.sleep)
         elif self.count == 500:
-            logging.debug('Sleeping %sms', self.long_sleep)
-            time.sleep(self.long_sleep / 1000)
-            self.count = 0      
+            logging.debug('Sleeping %ss', self.long_sleep)
+            time.sleep(self.long_sleep)
+            self.count = 0
 
     class System:
         def __init__(self, rd_instance):
